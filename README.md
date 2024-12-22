@@ -60,8 +60,5 @@ This project is a graphical user interface (GUI) tool for image processing, deve
 3. Open the GUI file (`Project.fig` or equivalent) in MATLAB's GUIDE or App Designer.
 4. Run the project.
 
-## Screenshots
-![GUI Screenshot](image.png)
-
 ## Author
 Developed by Abdulrhman Amr. For inquiries, contact:(mailto:abdulrhmanamro7180@gmail.com) or +201115591046.
