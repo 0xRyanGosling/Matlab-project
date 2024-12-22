@@ -54,7 +54,7 @@ This project is a graphical user interface (GUI) tool for image processing, deve
 ## Installation
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/0xRyanGosling/Matlab-project
    ```
 2. Open MATLAB and navigate to the project directory.
 3. Open the GUI file (`Project.fig` or equivalent) in MATLAB's GUIDE or App Designer.
