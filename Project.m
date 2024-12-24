@@ -816,9 +816,9 @@ global X
 GammaFactor = str2double(get(handles.GammaEdit, 'String'));
 
 % Check if the input is a valid number
-if isnan(GammaFactor) || GammaFactor <= 0
+if isnan(GammaFactor) 
     % If invalid, show an error message and return
-    errordlg('Please enter a valid factor (positive number)', 'Invalid Input');
+    errordlg('Please enter a valid factor', 'Invalid Input');
     return;
 end
 

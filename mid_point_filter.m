@@ -17,10 +17,10 @@ function outimg = mid_point_filter(img, filterSize)
     paddedImg(padSize+1:end-padSize, padSize+1:end-padSize) = img;
 
     % Replicate borders
-    paddedImg(1:padSize, padSize+1:end-padSize) = img(1, :); % Top
-    paddedImg(end-padSize+1:end, padSize+1:end-padSize) = img(end, :); % Bottom
-    paddedImg(padSize+1:end-padSize, 1:padSize) = img(:, 1); % Left
-    paddedImg(padSize+1:end-padSize, end-padSize+1:end) = img(:, end); % Right
+    paddedImg(1:padSize, padSize+1:end-padSize) = repmat(img(1, :), padSize, 1); % Top
+    paddedImg(end-padSize+1:end, padSize+1:end-padSize) = repmat(img(end, :), padSize, 1); % Bottom
+    paddedImg(padSize+1:end-padSize, 1:padSize) = repmat(img(:, 1), 1, padSize); % Left
+    paddedImg(padSize+1:end-padSize, end-padSize+1:end) = repmat(img(:, end), 1, padSize); % Right
     
     % Initialize the output image
     outimg = zeros(rows, cols);

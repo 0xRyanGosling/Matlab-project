@@ -14,11 +14,11 @@ function outimg = min_filter(img, filterSize)
     paddedImg = zeros(rows + 2 * padSize, cols + 2 * padSize);
     paddedImg(padSize+1:end-padSize, padSize+1:end-padSize) = img;
 
-    % Replicate the borders
-    paddedImg(1:padSize, padSize+1:end-padSize) = img(1, :); % Top
-    paddedImg(end-padSize+1:end, padSize+1:end-padSize) = img(end, :); % Bottom
-    paddedImg(padSize+1:end-padSize, 1:padSize) = img(:, 1); % Left
-    paddedImg(padSize+1:end-padSize, end-padSize+1:end) = img(:, end); % Right
+    % Replicate the borders using repmat
+    paddedImg(1:padSize, padSize+1:end-padSize) = repmat(img(1, :), padSize, 1); % Top
+    paddedImg(end-padSize+1:end, padSize+1:end-padSize) = repmat(img(end, :), padSize, 1); % Bottom
+    paddedImg(padSize+1:end-padSize, 1:padSize) = repmat(img(:, 1), 1, padSize); % Left
+    paddedImg(padSize+1:end-padSize, end-padSize+1:end) = repmat(img(:, end), 1, padSize); % Right
 
     % Initialize the output image
     outimg = zeros(rows, cols);
@@ -27,7 +27,7 @@ function outimg = min_filter(img, filterSize)
     for i = 1:rows
         for j = 1:cols
             localRegion = paddedImg(i:i+filterSize-1, j:j+filterSize-1);
-            outimg(i, j) = min(localRegion(:));
+            outimg(i, j) = min(localRegion(:));  % Apply the min function
         end
     end
 
