@@ -22,7 +22,7 @@ function varargout = Project(varargin)
 
 % Edit the above text to modify the response to help Project
 
-% Last Modified by GUIDE v2.5 23-Dec-2024 00:34:25
+% Last Modified by GUIDE v2.5 24-Dec-2024 22:20:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -499,8 +499,10 @@ function FourierTransform_Callback(hObject, eventdata, handles)
     end
 
     % Perform the Fourier Transform
-    fftImage = fftshift(fft2(double(img)));
-    magnitude = log(1 + abs(fftImage)); % Log scale for better visualization
+    fftImage = fftshift(fft2(double(img))); % اعداد حفيقيه و تخيليه now it can not be shown casue it is complex array 
+    magnitude = log(1 + abs(fftImage)); % Log scale for better visualization 
+    %abs get red of imagin 
+    %log or bright the image
 
     % Display the Fourier Transform in the designated axes
     axes(handles.axes2); % Replace 'axes2' with the tag of your desired axes
@@ -513,41 +515,20 @@ function InversFourier_Callback(hObject, eventdata, handles)
 % hObject    handle to InversFourier (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global X; % Use the global variable X (the uploaded image)
+global fftData; % Access the saved complex Fourier data
 
-% Check if an image is uploaded
-if isempty(X)
-    errordlg('Please upload an image first.', 'No Image Found');
+% Check if Fourier data exists
+if isempty(fftData)
+    errordlg('No Fourier Transform data found. Perform Fourier Transform first.', 'Error');
     return;
 end
 
-% Convert the image to grayscale if necessary
-if size(X, 3) == 3
-    img = rgb2gray(X);
-else
-    img = X;
-end
-
-% Perform Fourier Transform
-img_fft = fft2(double(img));
-img_fft_shifted = fftshift(img_fft); % Shift zero frequency to center
-magnitude_spectrum = log(1 + abs(img_fft_shifted));
-
 % Perform Inverse Fourier Transform
-img_ifft = ifft2(ifftshift(img_fft)); % Shift back and apply inverse FFT
-img_ifft = real(img_ifft); % Take the real part for visualization
+ifftImage = real(ifft2(ifftshift(fftData))); % Reconstruct spatial domain image
 
-% Display results in GUI axes
-axes(handles.axes1); % Show Original Image
-imshow(X, []);
+% Display the reconstructed image on axes2
+axes(handles.axes2);
 
-
-axes(handles.axes2); % Show Magnitude Spectrum
-imshow(magnitude_spectrum, []);
-
-
-axes(handles.axes3); % Show Reconstructed Image
-imshow(img_ifft, []);
 
     
 
@@ -1596,9 +1577,9 @@ function pushbutton75_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in Non_Linear.
-function Non_Linear_Callback(hObject, eventdata, handles)
-% hObject    handle to Non_Linear (see GCBO)
+% --- Executes on button press in Wighted_Avarage.
+function Wighted_Avarage_Callback(hObject, eventdata, handles)
+% hObject    handle to Wighted_Avarage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global X;
@@ -1606,9 +1587,9 @@ axes(handles.axes2);
 blurimgwavg(X);
 
 
-% --- Executes on button press in Linear.
-function Linear_Callback(hObject, eventdata, handles)
-% hObject    handle to Linear (see GCBO)
+% --- Executes on button press in Avarage.
+function Avarage_Callback(hObject, eventdata, handles)
+% hObject    handle to Avarage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global X;
