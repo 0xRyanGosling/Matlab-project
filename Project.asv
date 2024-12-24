@@ -1648,6 +1648,5 @@ function convolution_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global X;
-mask = [1 1 1; 1 1 1; 1 1 1];
-axes(handles.axes2);
-convolution(X,mask);
+mask = [1 2 3; 4 5 6; 7 8 9];
+axes=(handles.axes2);
